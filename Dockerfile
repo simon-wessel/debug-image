@@ -59,12 +59,9 @@ ENV LC_ALL en_US.UTF-8
 RUN wget -nv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
     chmod +x /usr/bin/yq
 
-RUN apt-get install -y zsh
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-ENV SHELL=/usr/bin/zsh
 
 # grpcurl
 RUN wget -nv -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_arm64.tar.gz -O - | tar -xz -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/grpcurl
 
-CMD ["/usr/bin/zsh"]
+CMD ["/bin/bash"]
