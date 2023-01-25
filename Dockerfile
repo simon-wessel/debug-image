@@ -2,6 +2,12 @@ FROM ubuntu:22.04
 
 ENV TERM=xterm-256color
 
+# Locale setup
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
 RUN apt-get update && \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get install --no-install-recommends -y \
@@ -48,12 +54,6 @@ RUN apt-get update && \
     # Other
     redis-tools \
     ldap-utils
-
-# Locale setup
-RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
 
 # yq
 RUN wget -nv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
