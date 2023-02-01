@@ -17,6 +17,7 @@ RUN apt-get update && \
     traceroute \
     nmap \
     net-tools \
+    iproute2 \
     # Security
     ca-certificates \
     openssl \
