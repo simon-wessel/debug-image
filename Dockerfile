@@ -45,6 +45,7 @@ RUN apt-get update && \
     jq \
     p7zip-full \
     xz-utils \
+    rsync \
     gnupg2 \
     # Other
     redis-tools \
