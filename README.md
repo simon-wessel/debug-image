@@ -20,7 +20,7 @@ kind: Pod
 metadata:
   name: debug-pod
 spec:
-  containers: debug
+  containers:
   - image: docker.io/simonmwessel/debug:latest
     imagePullPolicy: IfNotPresent
     name: debug-pod
