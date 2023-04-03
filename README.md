@@ -25,7 +25,7 @@ spec:
     imagePullPolicy: IfNotPresent
     name: debug-pod
     command: [ "/bin/bash", "-c", "--" ]
-    args: [ "while true; do sleep 5; done;" ] # Keep Pod alive
+    args: [ "trap : TERM INT; sleep 9999999999d & wait" ] # Keep Pod alive until delete/kill
   restartPolicy: Never
   # Optional: Schedule Pod to specific node
   # nodeName: mynode
