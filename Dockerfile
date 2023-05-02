@@ -18,6 +18,7 @@ RUN apt-get update && \
     nmap \
     net-tools \
     iproute2 \
+    netcat \
     # Security
     ca-certificates \
     openssl \
