@@ -67,4 +67,8 @@ RUN wget -nv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_a
 RUN wget -nv -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_arm64.tar.gz -O - | tar -xz -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/grpcurl
 
+# kubectl
+RUN wget -nv "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -O /usr/local/bin/kubectl && \
+    chmod +x /usr/local/bin/kubectl
+
 CMD ["/bin/bash"]
