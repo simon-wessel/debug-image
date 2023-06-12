@@ -1,6 +1,8 @@
 # Debug Image
+<img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/simonmwessel/debug"> <img alt="Docker Image Size (latest by date)" src="https://img.shields.io/docker/image-size/simonmwessel/debug">
 
 Image containing various debugging tools.
+This image is more focused on the availability of tools than on the size.
 
 ## Usage with Kubernetes
 
