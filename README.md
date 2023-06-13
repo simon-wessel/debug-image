@@ -1,8 +1,8 @@
 # Debug Image
-<img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/simonmwessel/debug"> <img alt="Docker Image Size (latest by date)" src="https://img.shields.io/docker/image-size/simonmwessel/debug">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/simon-wessel/debug-image/docker-image.yml"> <img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/simonmwessel/debug"> <img alt="Docker Image Size (latest by date)" src="https://img.shields.io/docker/image-size/simonmwessel/debug">
 
 Image containing various debugging tools.
-This image is more focused on the availability of tools than on the size.
+This image is more focused on the availability of tools than on its size.
 
 ## Usage with Kubernetes
 
@@ -35,7 +35,10 @@ spec:
   # nodeName: mynode
 ```
 
-#### Pod manifest for namespaces with Pod Security Standards (non-root)
+#### Pod manifest for namespaces with Pod Security Standards
+
+This manifest can be used in namespaces that have pod security standard restrictions.
+The user in the pod will be a non-root user.
 
 ```yaml
 apiVersion: v1
