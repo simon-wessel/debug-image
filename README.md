@@ -9,7 +9,7 @@ This image is more focused on the availability of tools than on its size.
 ### Start debugging Pod using kubectl exec
 
 ```bash
-kubectl run -i --tty --rm debug --image=simonmwessel/debug:latest --restart=Never -- /bin/bash
+kubectl run -i --tty --rm debug --image=simonmwessel/debug:latest --image-pull-policy=Always --restart=Never -- /bin/bash
 ```
 
 ### Start debugging Pod using manifest
@@ -26,7 +26,7 @@ metadata:
 spec:
   containers:
   - image: docker.io/simonmwessel/debug:latest
-    imagePullPolicy: IfNotPresent
+    imagePullPolicy: Always
     name: debug-pod
     command: [ "/bin/bash", "-c", "--" ]
     args: [ "trap : TERM INT; sleep 9999999999d & wait" ] # Keep Pod alive until delete/kill
@@ -53,7 +53,7 @@ spec:
     runAsUser: 1000
   containers:
   - image: docker.io/simonmwessel/debug:latest
-    imagePullPolicy: IfNotPresent
+    imagePullPolicy: Always
     name: debug-pod
     command: [ "/bin/bash", "-c", "--" ]
     args: [ "trap : TERM INT; sleep 9999999999d & wait" ] # Keep Pod alive until delete/kill
