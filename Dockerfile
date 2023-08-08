@@ -50,7 +50,8 @@ RUN apt-get update && \
     gnupg2 \
     # Other
     redis-tools \
-    ldap-utils
+    ldap-utils \
+    etcd-client
 
 # Locale setup
 RUN locale-gen en_US.UTF-8
