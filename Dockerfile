@@ -72,4 +72,7 @@ RUN wget -nv -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7
 RUN wget -nv "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -O /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl
 
+# helm
+RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
 CMD ["/bin/bash"]
