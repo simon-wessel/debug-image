@@ -4,6 +4,7 @@ ENV TERM=xterm-256color
 
 RUN apt-get update && \
     export DEBIAN_FRONTEND=noninteractive && \
+    apt-get upgrade -y && \
     apt-get install --no-install-recommends -y \
     # Web
     curl \
