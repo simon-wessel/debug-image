@@ -65,7 +65,7 @@ RUN wget -nv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_a
     chmod +x /usr/bin/yq
 
 # grpcurl
-RUN wget -nv -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.7/grpcurl_1.8.7_linux_arm64.tar.gz -O - | tar -xz -C /usr/local/bin/ && \
+RUN wget -nv -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.9/grpcurl_1.8.9_linux_arm64.tar.gz -O - | tar -xz -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/grpcurl
 
 # kubectl
@@ -80,6 +80,7 @@ RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc -O /usr/local/bin/mc
     chmod +x /usr/local/bin/mc
 
 # xh
-RUN curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | bash
+ENV XH_BINDIR="/usr/local/bin"
+RUN curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | sh
 
 CMD ["/bin/bash"]
