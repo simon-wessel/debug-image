@@ -10,7 +10,6 @@ RUN apt-get update && \
     curl \
     wget \
     httping \
-    xh \
     # Networking
     iputils-ping \
     dnsutils \
@@ -79,5 +78,8 @@ RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | b
 # minio client
 RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc -O /usr/local/bin/mc && \
     chmod +x /usr/local/bin/mc
+
+# xh
+RUN curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | bash
 
 CMD ["/bin/bash"]
