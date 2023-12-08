@@ -10,6 +10,7 @@ RUN apt-get update && \
     curl \
     wget \
     httping \
+    xh \
     # Networking
     iputils-ping \
     dnsutils \
