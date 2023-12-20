@@ -42,6 +42,7 @@ RUN apt-get update && \
     tmux \
     bash \
     bash-completion \
+    zsh \
     locales \
     # Utils
     jq \
@@ -83,4 +84,11 @@ RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc -O /usr/local/bin/mc
 ENV XH_BINDIR="/usr/local/bin"
 RUN curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | sh
 
-CMD ["/bin/bash"]
+# oh-my-zsh
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN echo 'PS1="${fg[red]}[DEBUG-CONTAINER] %(!.%{%F{yellow}%}.)%n@%M ${PS1}"' >> /root/.zshrc
+ENV SHELL="/bin/zsh"
+ENV HOME="/root"
+WORKDIR /root
+
+CMD ["/bin/zsh"]

@@ -9,7 +9,7 @@ This image is more focused on the availability of tools than on its size.
 ### Start debugging Pod using kubectl exec
 
 ```bash
-kubectl run -i --tty --rm debug --image=simonmwessel/debug:latest --image-pull-policy=Always --restart=Never -- /bin/bash
+kubectl run -i --tty --rm debug --image=simonmwessel/debug:latest --image-pull-policy=Always --restart=Never -- /bin/zsh
 ```
 
 ### Start debugging Pod using manifest
@@ -75,5 +75,5 @@ spec:
 # Apply Pod
 kubectl apply -n mynamespace -f manifest.yaml
 # Open shell on Pod
-kubectl exec -n mynamespace --stdin --tty debug-pod -- /bin/bash
+kubectl exec -n mynamespace --stdin --tty debug-pod -- /bin/zsh
 ```
