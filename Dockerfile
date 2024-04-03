@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
 ENV TERM=xterm-256color
+ENV EDITOR=nano
 
 RUN apt-get update && \
     export DEBIAN_FRONTEND=noninteractive && \
