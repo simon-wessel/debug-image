@@ -91,7 +91,7 @@ ENV HOME="/root"
 WORKDIR /root
 
 # etcd
-ENV ETCD_VER=v3.5.11
+ENV ETCD_VER=v3.5.13
 RUN mkdir -p /tmp/etcd-download && \
     curl -L https://github.com/etcd-io/etcd/releases/download/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz && \
     tar xzvf /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz -C /tmp/etcd-download --strip-components=1 && \
