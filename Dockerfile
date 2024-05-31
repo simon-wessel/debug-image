@@ -51,6 +51,7 @@ RUN apt-get update && \
     xz-utils \
     rsync \
     gnupg2 \
+    unzip \
     # Other
     redis-tools \
     ldap-utils
@@ -62,27 +63,33 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # yq
-RUN wget -nv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
-    chmod +x /usr/bin/yq
+RUN wget -nv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_$(dpkg --print-architecture) -O /usr/bin/yq && \
+    chmod +x /usr/bin/yq && \
+    yq --version
 
 # grpcurl
-RUN wget -nv -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.9/grpcurl_1.8.9_linux_arm64.tar.gz -O - | tar -xz -C /usr/local/bin/ && \
-    chmod +x /usr/local/bin/grpcurl
+RUN wget -nv -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.9/grpcurl_1.8.9_linux_$(dpkg --print-architecture).tar.gz -O - | tar -xz -C /usr/local/bin/ && \
+    chmod +x /usr/local/bin/grpcurl && \
+    grpcurl --version
 
 # kubectl
-RUN wget -nv "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -O /usr/local/bin/kubectl && \
-    chmod +x /usr/local/bin/kubectl
+RUN wget -nv "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$(dpkg --print-architecture)/kubectl" -O /usr/local/bin/kubectl && \
+    chmod +x /usr/local/bin/kubectl && \
+    kubectl version --client=true
 
 # helm
-RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash && \
+    helm version
 
 # minio client
-RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc -O /usr/local/bin/mc && \
-    chmod +x /usr/local/bin/mc
+RUN wget https://dl.min.io/client/mc/release/linux-$(dpkg --print-architecture)/mc -O /usr/local/bin/mc && \
+    chmod +x /usr/local/bin/mc && \
+    mc --version
 
 # xh
 ENV XH_BINDIR="/usr/local/bin"
-RUN curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | sh
+RUN curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | sh && \
+    xh --version
 
 # oh-my-zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -94,11 +101,23 @@ WORKDIR /root
 # etcd
 ENV ETCD_VER=v3.5.13
 RUN mkdir -p /tmp/etcd-download && \
-    curl -L https://github.com/etcd-io/etcd/releases/download/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz && \
-    tar xzvf /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz -C /tmp/etcd-download --strip-components=1 && \
-    rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz && \
+    curl -L https://github.com/etcd-io/etcd/releases/download/${ETCD_VER}/etcd-${ETCD_VER}-linux-$(dpkg --print-architecture).tar.gz -o /tmp/etcd.tar.gz && \
+    tar xzvf /tmp/etcd.tar.gz -C /tmp/etcd-download --strip-components=1 && \
+    rm -f /tmp/etcd.tar.gz && \
     mv /tmp/etcd-download/etcdctl /usr/local/bin/etcdctl && \
+    chmod +x /usr/local/bin/etcdctl && \
     mv /tmp/etcd-download/etcdutl /usr/local/bin/etcdutl && \
-    rm -rf /tmp/etcd-download
+    chmod +x /usr/local/bin/etcdutl && \
+    rm -rf /tmp/etcd-download && \
+    etcdctl version && \
+    etcdutl version
+
+# aws-cli
+RUN mkdir -p /tmp/aws-cli-download && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "/tmp/aws-cli-download/awscliv2.zip" && \
+    unzip -q /tmp/aws-cli-download/awscliv2.zip -d /tmp/aws-cli-download && \
+    /tmp/aws-cli-download/aws/install && \
+    rm -rf /tmp/aws-cli-download && \
+    aws --version
 
 CMD ["/bin/zsh"]
