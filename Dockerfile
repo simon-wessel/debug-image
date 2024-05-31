@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ENV TERM=xterm-256color
 ENV EDITOR=nano
@@ -20,7 +20,7 @@ RUN apt-get update && \
     nmap \
     net-tools \
     iproute2 \
-    netcat \
+    netcat-traditional \
     # Security
     ca-certificates \
     openssl \
@@ -31,8 +31,6 @@ RUN apt-get update && \
     vim \
     # Development
     git \
-    python-setuptools \
-    python-pip \
     # Database
     mysql-client \
     postgresql-client \
@@ -63,17 +61,17 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # yq
-RUN wget -nv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_$(dpkg --print-architecture) -O /usr/bin/yq && \
+RUN wget -qnv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_$(dpkg --print-architecture) -O /usr/bin/yq && \
     chmod +x /usr/bin/yq && \
     yq --version
 
 # grpcurl
-RUN wget -nv -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.9/grpcurl_1.8.9_linux_$(dpkg --print-architecture).tar.gz -O - | tar -xz -C /usr/local/bin/ && \
+RUN wget -qnv -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.9/grpcurl_1.8.9_linux_$(dpkg --print-architecture).tar.gz -O - | tar -xz -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/grpcurl && \
     grpcurl --version
 
 # kubectl
-RUN wget -nv "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$(dpkg --print-architecture)/kubectl" -O /usr/local/bin/kubectl && \
+RUN wget -qnv "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$(dpkg --print-architecture)/kubectl" -O /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl && \
     kubectl version --client=true
 
@@ -82,7 +80,7 @@ RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | b
     helm version
 
 # minio client
-RUN wget https://dl.min.io/client/mc/release/linux-$(dpkg --print-architecture)/mc -O /usr/local/bin/mc && \
+RUN wget -qnv https://dl.min.io/client/mc/release/linux-$(dpkg --print-architecture)/mc -O /usr/local/bin/mc && \
     chmod +x /usr/local/bin/mc && \
     mc --version
 
