@@ -64,7 +64,8 @@ ENV LC_ALL en_US.UTF-8
 RUN echo "Architecture is $(dpkg --print-architecture)/$(uname -m)"
 
 # yq
-RUN wget -qnv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_$(dpkg --print-architecture) -O /usr/bin/yq && \
+RUN ARCH=$(dpkg --print-architecture | sed s/amd64/x86_64/) && \
+    wget -qnv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${ARCH} -O /usr/bin/yq && \
     chmod +x /usr/bin/yq && \
     yq --version
 
