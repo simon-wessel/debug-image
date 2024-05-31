@@ -60,6 +60,9 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
+# Architecture info
+RUN echo "Architecture is $(dpkg --print-architecture)/$(uname -m)"
+
 # yq
 RUN wget -qnv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_$(dpkg --print-architecture) -O /usr/bin/yq && \
     chmod +x /usr/bin/yq && \
