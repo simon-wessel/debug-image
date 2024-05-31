@@ -72,7 +72,7 @@ RUN ARCH=$(dpkg --print-architecture | sed s/armhf/arm/) && \
 
 # grpcurl
 ENV GRPCURL_VERSION=1.9.1
-RUN ARCH=$(dpkg --print-architecture | sed s/amd64/x86_64/) && \
+RUN ARCH=$(dpkg --print-architecture | sed s/amd64/x86_64/ | sed s/armhf/arm/) && \
     wget -qnv -c https://github.com/fullstorydev/grpcurl/releases/download/v${GRPCURL_VERSION}/grpcurl_${GRPCURL_VERSION}_linux_${ARCH}.tar.gz -O - | tar -xz -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/grpcurl && \
     grpcurl --version
