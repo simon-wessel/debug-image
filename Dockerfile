@@ -66,7 +66,8 @@ RUN wget -qnv https://github.com/mikefarah/yq/releases/latest/download/yq_linux_
     yq --version
 
 # grpcurl
-RUN wget -qnv -c https://github.com/fullstorydev/grpcurl/releases/download/v1.8.9/grpcurl_1.8.9_linux_$(dpkg --print-architecture).tar.gz -O - | tar -xz -C /usr/local/bin/ && \
+ENV GRPCURL_VERSION=1.9.1
+RUN wget -qnv -c https://github.com/fullstorydev/grpcurl/releases/download/v${GRPCURL_VERSION}/grpcurl_${GRPCURL_VERSION}_linux_$(dpkg --print-architecture).tar.gz -O - | tar -xz -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/grpcurl && \
     grpcurl --version
 
