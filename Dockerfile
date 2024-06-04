@@ -89,7 +89,8 @@ RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | b
     helm version
 
 # minio client
-RUN wget -qnv https://dl.min.io/client/mc/release/linux-$(dpkg --print-architecture)/mc -O /usr/local/bin/mc && \
+RUN ARCH=$(dpkg --print-architecture | sed -e 's/armhf/arm/') && \
+    wget -qnv https://dl.min.io/client/mc/release/linux-${ARCH}/mc -O /usr/local/bin/mc && \
     chmod +x /usr/local/bin/mc && \
     mc --version
 
@@ -106,8 +107,10 @@ ENV HOME="/root"
 WORKDIR /root
 
 # etcd
-ENV ETCD_VER=v3.5.13
-RUN mkdir -p /tmp/etcd-download && \
+ENV ETCD_VER=v3.5.14
+RUN ARCH=$(dpkg --print-architecture | sed -e 's/armhf/arm/') && \
+    if [ "$ARCH" = "arm" ] ; then exit 0 ; fi && \
+    mkdir -p /tmp/etcd-download && \
     curl -L https://github.com/etcd-io/etcd/releases/download/${ETCD_VER}/etcd-${ETCD_VER}-linux-$(dpkg --print-architecture).tar.gz -o /tmp/etcd.tar.gz && \
     tar xzvf /tmp/etcd.tar.gz -C /tmp/etcd-download --strip-components=1 && \
     rm -f /tmp/etcd.tar.gz && \
