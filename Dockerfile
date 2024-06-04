@@ -123,7 +123,7 @@ RUN ARCH=$(dpkg --print-architecture | sed -e 's/armhf/arm/') && \
     etcdutl version
 
 # aws-cli
-RUN ARCH=$(dpkg --print-architecture | sed -e 's/arm64/aarch64/' -e 's/armhf/arm/') && \
+RUN ARCH=$(dpkg --print-architecture | sed -e 's/arm64/aarch64/' -e 's/amd64/x86_64' -e 's/armhf/arm/') && \
     if [ "$ARCH" = "arm" ] ; then exit 0 ; fi && \
     mkdir -p /tmp/aws-cli-download && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}.zip" -o "/tmp/aws-cli-download/awscliv2.zip" && \
