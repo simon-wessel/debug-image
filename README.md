@@ -1,7 +1,9 @@
 # Debug Image
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/simon-wessel/debug-image/docker-image.yml"> <img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/simonmwessel/debug"> <img alt="Docker Image Size (latest by date)" src="https://img.shields.io/docker/image-size/simonmwessel/debug">
 
-![](images/debug_image_logo.jpg)
+<p align="center">
+  <img src="images/debug_image_logo.jpg" width="50%">
+</p>
 
 Image containing various debugging tools.
 This image is more focused on the availability of tools than on its size.
