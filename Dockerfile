@@ -72,14 +72,15 @@ RUN ARCH=$(dpkg --print-architecture | sed s/armhf/arm/) && \
 
 # grpcurl
 ENV GRPCURL_VERSION=1.9.1
-RUN ARCH=$(dpkg --print-architecture | sed s/amd64/x86_64/ | sed s/armhf/arm/) && \
+RUN ARCH=$(dpkg --print-architecture | sed -e 's/amd64/x86_64/' -e 's/armhf/arm/') && \
     if [ "$ARCH" = "arm" ] ; then exit 0 ; fi && \
     wget -qnv -c https://github.com/fullstorydev/grpcurl/releases/download/v${GRPCURL_VERSION}/grpcurl_${GRPCURL_VERSION}_linux_${ARCH}.tar.gz -O - | tar -xz -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/grpcurl && \
     grpcurl --version
 
 # kubectl
-RUN wget -qnv "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$(dpkg --print-architecture)/kubectl" -O /usr/local/bin/kubectl && \
+RUN ARCH=$(dpkg --print-architecture | sed -e 's/armhf/arm/') && \
+    wget -qnv "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${ARCH}/kubectl" -O /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl && \
     kubectl version --client=true
 
