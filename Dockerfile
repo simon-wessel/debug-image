@@ -96,7 +96,9 @@ RUN ARCH=$(dpkg --print-architecture | sed -e 's/armhf/arm/') && \
 
 # xh
 ENV XH_BINDIR="/usr/local/bin"
-RUN curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | sh && \
+RUN ARCH=$(dpkg --print-architecture | sed -e 's/armhf/arm/') && \
+    if [ "$ARCH" = "arm" ] ; then exit 0 ; fi && \
+    curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | sh && \
     xh --version
 
 # oh-my-zsh
