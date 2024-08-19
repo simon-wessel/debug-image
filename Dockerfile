@@ -50,6 +50,7 @@ RUN apt-get update && \
     rsync \
     gnupg2 \
     unzip \
+    tree \
     # Other
     redis-tools \
     ldap-utils && \
