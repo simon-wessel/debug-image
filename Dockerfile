@@ -86,7 +86,8 @@ RUN ARCH=$(dpkg --print-architecture | sed -e 's/armhf/arm/') && \
     kubectl version --client=true
 
 # helm
-RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash && \
+RUN if [ "$ARCH" = "arm64" ] ; then exit 0 ; fi && \
+    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash && \
     helm version
 
 # minio client
