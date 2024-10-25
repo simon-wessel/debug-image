@@ -86,7 +86,8 @@ RUN ARCH=$(dpkg --print-architecture | sed -e 's/armhf/arm/') && \
     kubectl version --client=true
 
 # helm
-RUN if [ "$ARCH" = "arm64" ] ; then exit 0 ; fi && \
+RUN ARCH=$(dpkg --print-architecture | sed -e 's/amd64/x86_64/' -e 's/armhf/arm/') && \
+    if [ "$ARCH" = "arm64" ] ; then exit 0 ; fi && \
     curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash && \
     helm version
 
