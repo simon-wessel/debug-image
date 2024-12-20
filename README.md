@@ -34,6 +34,7 @@ spec:
     name: debug-pod
     command: [ "/bin/bash", "-c", "--" ]
     args: [ "trap : TERM INT; sleep 1d & wait" ] # Keep Pod alive for 1 day or until delete/kill
+  terminationGracePeriodSeconds: 0
   restartPolicy: Never
   # Optional: Schedule Pod to specific node
   # nodeName: mynode
@@ -68,6 +69,7 @@ spec:
       capabilities:
         drop:
         - ALL
+  terminationGracePeriodSeconds: 0
   restartPolicy: Never
   # Optional: Schedule Pod to specific node
   # nodeName: mynode
