@@ -92,10 +92,10 @@ RUN ARCH=$(dpkg --print-architecture | sed -e 's/amd64/x86_64/' -e 's/armhf/arm/
     helm version
 
 # minio client
-RUN ARCH=$(dpkg --print-architecture | sed -e 's/armhf/arm/') && \
-    wget -qnv https://dl.min.io/client/mc/release/linux-${ARCH}/mc -O /usr/local/bin/mc && \
-    chmod +x /usr/local/bin/mc && \
-    mc --version
+# RUN ARCH=$(dpkg --print-architecture | sed -e 's/armhf/arm/') && \
+#     wget -qnv https://dl.min.io/client/mc/release/linux-${ARCH}/mc -O /usr/local/bin/mc && \
+#     chmod +x /usr/local/bin/mc && \
+#     mc --version
 
 # xh
 ENV XH_BINDIR="/usr/local/bin"
